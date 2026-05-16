@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import Navbar from "./shared/Navbar";
 import FilterCard from "./FilterCard";
 import Job from "./Job";
-import { applyFilters } from "./filterUtils";
+import { applyFilters } from "./Filterutils.jsx";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { SlidersHorizontal, X } from "lucide-react";

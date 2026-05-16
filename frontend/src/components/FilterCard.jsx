@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setSearchedQuery } from "@/redux/jobSlice";
-import { filterData } from "./filterUtils";
+import { filterData } from "./Filterutils.jsx";
 
 const FilterCard = ({ onApply }) => {
   const [selected, setSelected] = useState({});
