@@ -58,6 +58,11 @@ const Login = () => {
         { withCredentials: true }
       );
       if (res.data.success) {
+        const token = res.data.token;
+        if (token) {
+          localStorage.setItem("token", token);
+          axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+        }
         dispatch(setUser(res.data.user));
         navigate("/");
         toast.success(res.data.message);

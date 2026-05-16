@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import axios from 'axios'
 import App from './App.jsx'
 import './index.css'
 import { Toaster } from './components/ui/sonner.jsx'
@@ -7,6 +8,11 @@ import { Provider } from 'react-redux'
 import store from './redux/store.js'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
+
+const token = localStorage.getItem('token');
+if (token) {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+}
 
 const persistor = persistStore(store);
 

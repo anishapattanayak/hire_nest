@@ -56,20 +56,23 @@ const Navbar = () => {
     try {
       const res = await axios.get(`${USER_API_END_POINT}/logout`, { withCredentials: true });
       if (res.data.success) {
-        dispatch(setUser(null));
-        navigate("/");
-        toast.success(res.data.message);
-        setMenuOpen(false);
+          localStorage.removeItem("token");
+          delete axios.defaults.headers.common.Authorization;
+          dispatch(setUser(null));
+          navigate("/");
+          toast.success(res.data.message);
+          setMenuOpen(false);
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "Logout failed");
     }
   };
 
-  const navLinks = user && user.role === "recruiter"
-    ? [{ to: "/admin/companies", label: "Companies" }, { to: "/admin/jobs", label: "Jobs" }]
-    : [{ to: "/", label: "Home" }, { to: "/jobs", label: "Jobs" }, { to: "/browse", label: "Browse" }, { to: "/about", label: "About" }];
+  const navLinks =
+    user && user.role === "recruiter"
+      ? [{ to: "/admin/companies", label: "Companies" }, { to: "/admin/jobs", label: "Jobs" }]
+      : [{ to: "/", label: "Home" }, { to: "/jobs", label: "Jobs" }, { to: "/browse", label: "Browse" }, { to: "/about", label: "About" }];
 
   return (
     <>
